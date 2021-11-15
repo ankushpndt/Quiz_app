@@ -3,10 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { ThemeProvider } from './Contexts/ThemeContext';
+import { AuthProvider } from './Contexts/AuthContext';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { QuizProvider } from './Contexts/QuizContext';
+import { LeaderboardProvider } from './Contexts/LeaderboardContext';
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {' '}
+    <AuthProvider>
+      <LeaderboardProvider>
+        <ThemeProvider>
+          <QuizProvider>
+            <Router>
+              <App />
+            </Router>
+          </QuizProvider>
+        </ThemeProvider>
+      </LeaderboardProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
