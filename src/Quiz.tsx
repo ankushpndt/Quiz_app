@@ -1,5 +1,5 @@
 // import { Questions } from './data/Questions';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 // import { useState } from 'react';
 import { v4 } from 'uuid';
@@ -25,7 +25,7 @@ export const Quiz = () => {
   const { setLeaderboard } = useLeaderboard();
   // const navigate = useNavigate();
   const filteredQuestions = Questions?.filter(
-    (question) => question.category.toLowerCase() === category.toLowerCase()
+    (question) => question?.category?.toLowerCase() === category?.toLowerCase()
   );
 
   const answerCheck = (item: Options) => {

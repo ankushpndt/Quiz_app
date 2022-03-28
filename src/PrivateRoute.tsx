@@ -1,14 +1,10 @@
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from './Contexts/AuthContext';
 type PrivateRouteType = {
-  path: string;
-  element: any;
+  children: any;
 };
-export const PrivateRoute = ({ path, ...props }: PrivateRouteType) => {
+export const PrivateRoute = ({ children }: PrivateRouteType) => {
   const { login } = useAuth();
-  return login ? (
-    <Route path={path} {...props} />
-  ) : (
-    <Navigate state={{ from: path }} replace to='/' />
-  );
+
+  return login ? children : <Navigate to='/login' />;
 };

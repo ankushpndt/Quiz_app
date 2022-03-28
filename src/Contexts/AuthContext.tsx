@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { ServerError } from '../types/serverError.type';
 // import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -26,9 +26,9 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
       };
 
   const [login, setLogin] = useState<boolean>(isUserLoggedIn);
-  const [token, setToken] = useState(savedToken);
+  const [token, setToken] = useState<string>(savedToken);
   const [error, setError] = useState('');
-  const [user, setUser] = useState(userName);
+  const [user, setUser] = useState<string>(userName);
 
   //signup
 
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
           return serverError.response.data;
         }
       }
-      console.log(error.response);
+      // console.log(error.response);
       return {
         success: false,
         message: 'Could not login in',
@@ -117,6 +117,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         token,
         userLogout,
         user,
+        setError,
       }}
     >
       {children}

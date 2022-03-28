@@ -1,5 +1,3 @@
-import axios, { AxiosError } from 'axios';
-import React, { createContext, useContext, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useLeaderboard } from './Contexts/LeaderboardContext';
 export const Leaderboard = () => {
@@ -27,18 +25,18 @@ export const Leaderboard = () => {
 
         {/* <td style={{ display: 'flex', flexDirection: 'column' }}> */}
         {leaderboard.map((item) => (
-          <>
-            <tr key={v4()}>
+          <div key={v4()}>
+            <tr>
               <td
                 style={{ display: 'flex', flexDirection: 'column' }}
                 key={v4()}
               >
                 {item.category}
               </td>
-              <td key={v4()}>{item.name}</td>
-              <td key={v4()}>{item.score}</td>
+              <td>{item.name}</td>
+              <td>{item.score}</td>
             </tr>
-          </>
+          </div>
         ))}
         {/* </td> */}
       </table>

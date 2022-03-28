@@ -1,4 +1,7 @@
 import { ServerError } from '../types/serverError.type';
+type Error = {
+  message: string;
+};
 export type authContext = {
   loginWithCredentials: ({
     email,
@@ -9,13 +12,14 @@ export type authContext = {
     | undefined
   >;
   userLogout: () => void;
+  setError: (value: string) => void;
   signUpWithCredentials: ({
     email,
     password,
     name,
   }: SignUpUserDetails) => Promise<any>;
   login: boolean;
-  error: string;
+  error: any;
   token: string;
   user: string;
 };

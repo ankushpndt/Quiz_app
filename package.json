@@ -2,37 +2,11 @@
   "name": "quiz_app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.4.7",
-    "@types/react-dom": "^17.0.0",
-    "@types/uuid": "^8.3.1",
-    "axios": "^0.21.1",
-    "history": "^5.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.0.0-beta.0",
-    "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "uuid": "^8.3.2",
-    "web-vitals": "^1.0.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
@@ -46,7 +20,43 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.5.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.14.24",
+    "@types/react-dom": "^17.0.0",
+    "@types/uuid": "^8.3.1",
+    "axios": "^0.21.1",
+    "generator-jhipster": "^7.7.0",
+    "history": "^5.0.0",
+    "node-libs-browser": "^2.2.1",
+    "node-sass": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-error-overlay": "^6.0.10",
+    "react-router": "^6.2.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.0-next.31",
+    "typescript": "^4.1.2",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.0.1",
+    "workbox-webpack-plugin": "^6.5.2"
+  },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.8"
+    "@types/jest": "^27.4.1",
+    "@types/react-router-dom": "^5.1.8",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^7.4.3"
   }
 }

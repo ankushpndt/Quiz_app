@@ -1,11 +1,11 @@
-import { useTheme } from './Contexts/ThemeContext';
+// import { useTheme } from './Contexts/ThemeContext';
 export type Props = {
   username: string;
   score: number;
 };
 
 const Header = ({ username, score }: Props) => {
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
   return (
     <div className='header'>
       <h3>Quiz App</h3>

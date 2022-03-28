@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { QuizContextType } from '../types/QuizContext.type';
 const QuizContext = createContext({} as QuizContextType);
