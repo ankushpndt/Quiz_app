@@ -24,7 +24,7 @@ export const Quiz = () => {
   } = useQuiz();
   const { Questions } = useQuiz();
   const { category } = useParams();
-  const { user, token } = useAuth();
+  const { user } = useAuth();
   const { leaderboard, setLeaderboard } = useLeaderboard();
 
   const filteredQuestions = Questions?.filter(
