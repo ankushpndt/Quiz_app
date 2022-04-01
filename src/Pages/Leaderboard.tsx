@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
-import { Loader } from './Components/Loader';
-import { useLeaderboard } from './Contexts/LeaderboardContext';
+import { Loader } from '../Components/Loader';
+import { useLeaderboard } from '../Contexts/LeaderboardContext';
 export const Leaderboard = () => {
   const { leaderboard } = useLeaderboard();
 

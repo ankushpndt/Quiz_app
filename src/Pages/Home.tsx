@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
-import Marvel from './assets/marvel.jpg';
-import DC from './assets/dc.jpg';
+import Marvel from '../assets/marvel.jpg';
+import DC from '../assets/dc.jpg';
 import './App.css';
 export const Home = () => {
   return (

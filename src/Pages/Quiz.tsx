@@ -2,17 +2,17 @@ import { useParams } from 'react-router';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { v4 } from 'uuid';
-import { Options } from './data/Questions.type';
+import { Options } from '../data/Questions.type';
 import { Header } from './Header';
 import './App.css';
-import { useQuiz } from './Contexts/QuizContext';
+import { useQuiz } from '../Contexts/QuizContext';
 import axios from 'axios';
-import { useAuth } from './Contexts/AuthContext';
-import { useLeaderboard } from './Contexts/LeaderboardContext';
+import { useAuth } from '../Contexts/AuthContext';
+import { useLeaderboard } from '../Contexts/LeaderboardContext';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HomeIcon from '@mui/icons-material/Home';
-import { Loader } from './Components/Loader';
+import { Loader } from '../Components/Loader';
 export const Quiz = () => {
   const {
     quesNo,
