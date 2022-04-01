@@ -1,17 +1,18 @@
 import axios, { AxiosError } from 'axios';
 import React, { createContext, useContext, useState } from 'react';
 import { ServerError } from '../types/serverError.type';
-// import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   authContext,
   LoginUserDetails,
   SignUpUserDetails,
 } from './AuthContext.type';
+import { toast } from 'react-toastify';
 export const AuthContext = createContext<authContext>({} as authContext);
 
 export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
-  // const navigate = useNavigate();
-  // const { state } = useLocation();
+  const navigate = useNavigate();
+
   const localStorageDetails = localStorage?.getItem('login');
   const {
     isUserLoggedIn,
@@ -43,7 +44,19 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         { name: name, email: email, password: password }
       );
       // console.log(response);
-      return response?.data;
+
+      if (response.data.success === true) {
+        const { token, userName } = response?.data;
+        setToken(token);
+        setLogin(true);
+        setUser(userName);
+        localStorage.setItem(
+          'login',
+          JSON.stringify({ isUserLoggedIn: true, token, user: userName })
+        );
+      } else {
+      }
+      response.data.success === true ? navigate('/home') : navigate('/');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<ServerError>;
@@ -51,12 +64,9 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
           return serverError.response.data;
         }
       }
+
+      toast(error.response.data.message);
       console.log(error);
-      return {
-        success: false,
-        message: 'Could not Signup',
-        errorMessage: 'Something went wrong',
-      };
     }
   };
 
@@ -73,7 +83,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         }
       );
       console.log(response);
-      if (response.status === 200) {
+      if (response.data.success === true) {
         const { token, userName } = response?.data;
         setToken(token);
         setLogin(true);
@@ -83,7 +93,8 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
           JSON.stringify({ isUserLoggedIn: true, token, user: userName })
         );
       }
-      //   if (response.data.user) navigate(state?.from ? state.from : '/home');
+
+      response.data.success === true ? navigate('/home') : navigate('/');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<ServerError>;
@@ -92,11 +103,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         }
       }
       // console.log(error.response);
-      return {
-        success: false,
-        message: 'Could not login in',
-        errorMessage: 'Something went wrong',
-      };
+      toast(error.response.data.message);
     }
   };
   const userLogout = async () => {
@@ -104,7 +111,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
     setLogin(false);
     setToken('');
     setUser('');
-    // navigate('/');
+    navigate('/');
   };
 
   return (

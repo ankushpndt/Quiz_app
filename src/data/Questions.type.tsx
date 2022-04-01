@@ -1,10 +1,10 @@
 export type Options = {
   option: string;
-
+  _id: string;
   isRight: boolean;
 };
 export type questions = {
-  id: string;
+  _id: string;
   category: string;
   question: string;
   options: Options[];

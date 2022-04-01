@@ -1,7 +1,5 @@
 import { ServerError } from '../types/serverError.type';
-type Error = {
-  message: string;
-};
+
 export type authContext = {
   loginWithCredentials: ({
     email,

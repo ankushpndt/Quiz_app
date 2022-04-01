@@ -6,5 +6,5 @@ type PrivateRouteType = {
 export const PrivateRoute = ({ children }: PrivateRouteType) => {
   const { login } = useAuth();
 
-  return login ? children : <Navigate to='/login' />;
+  return login ? children : <Navigate to='/' />;
 };

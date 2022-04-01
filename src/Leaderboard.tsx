@@ -1,45 +1,62 @@
 import { v4 } from 'uuid';
+import { Loader } from './Components/Loader';
 import { useLeaderboard } from './Contexts/LeaderboardContext';
 export const Leaderboard = () => {
   const { leaderboard } = useLeaderboard();
 
-  //   console.log(leaderboard);
+  console.log(leaderboard);
   return (
-    <div
-      className='leaderboard'
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <h2>Leaderboard</h2>
-      <table>
-        <tr>
-          <th>Category</th>
-          <th>Name</th>
-          <th>Score</th>
-        </tr>
+    <>
+      {leaderboard?.length > 0 ? (
+        <div
+          className='leaderboard'
+          style={{
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <h2>Leaderboard</h2>
+          <table style={{ padding: '1rem' }}>
+            <tbody>
+              <tr>
+                <th style={{ padding: '1rem' }}>Category</th>
+                <th style={{ padding: '0 1rem ' }}>Name</th>
+                <th style={{ padding: ' 0 1rem ' }}>Score</th>
+              </tr>
+            </tbody>
 
-        {/* <td style={{ display: 'flex', flexDirection: 'column' }}> */}
-        {leaderboard.map((item) => (
-          <div key={v4()}>
-            <tr>
-              <td
-                style={{ display: 'flex', flexDirection: 'column' }}
-                key={v4()}
+            {leaderboard?.length > 0 ? (
+              leaderboard?.map((item) => (
+                <tbody key={v4()}>
+                  <tr>
+                    <td style={{ padding: '0.4rem 0' }} key={v4()}>
+                      {item?.category}
+                    </td>
+                    <td>{item?.name}</td>
+                    <td>{item?.score}</td>
+                  </tr>
+                </tbody>
+              ))
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh',
+                }}
               >
-                {item.category}
-              </td>
-              <td>{item.name}</td>
-              <td>{item.score}</td>
-            </tr>
-          </div>
-        ))}
-        {/* </td> */}
-      </table>
-    </div>
+                Leaderboard is empty
+              </div>
+            )}
+          </table>
+        </div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };

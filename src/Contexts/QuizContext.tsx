@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { QuizContextType } from '../types/QuizContext.type';
+import { useAuth } from './AuthContext';
 const QuizContext = createContext({} as QuizContextType);
 
 export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
@@ -8,19 +9,21 @@ export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
   const [currentScore, setCurrentScore] = useState(0);
   const [currentQues, setCurrentQues] = useState(1);
   const [Questions, setQuestions] = useState([]);
+  const { token } = useAuth();
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await axios.get(
-          'https://quizBackend.ankushpndt.repl.co/quiz'
-        );
+    token &&
+      (async () => {
+        try {
+          const response = await axios.get(
+            'https://quizBackend.ankushpndt.repl.co/quiz'
+          );
 
-        setQuestions(response.data.quizData);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+          setQuestions(response.data.quizData);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+  }, [token]);
 
   return (
     <QuizContext.Provider

@@ -1,7 +1,6 @@
-// import { Questions } from './data/Questions';
 import { useParams } from 'react-router';
-import { NavLink } from 'react-router-dom';
-// import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { v4 } from 'uuid';
 import { Options } from './data/Questions.type';
 import { Header } from './Header';
@@ -10,6 +9,10 @@ import { useQuiz } from './Contexts/QuizContext';
 import axios from 'axios';
 import { useAuth } from './Contexts/AuthContext';
 import { useLeaderboard } from './Contexts/LeaderboardContext';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import HomeIcon from '@mui/icons-material/Home';
+import { Loader } from './Components/Loader';
 export const Quiz = () => {
   const {
     quesNo,
@@ -21,27 +24,37 @@ export const Quiz = () => {
   } = useQuiz();
   const { Questions } = useQuiz();
   const { category } = useParams();
-  const { user } = useAuth();
-  const { setLeaderboard } = useLeaderboard();
-  // const navigate = useNavigate();
+  const { user, token } = useAuth();
+  const { leaderboard, setLeaderboard } = useLeaderboard();
+
   const filteredQuestions = Questions?.filter(
     (question) => question?.category?.toLowerCase() === category?.toLowerCase()
   );
+  const [currentId, setCurrentId] = useState('');
 
+  const [color, setColor] = useState('');
   const answerCheck = (item: Options) => {
     if (currentQues >= 0 && currentQues <= 5) {
-      console.log('Current Ques No', currentQues);
+      setCurrentId(String(item?._id));
       setCurrentQues(currentQues + 1);
       if (item.isRight === true) {
-        setQuesNo(quesNo + 1);
+        setColor('#10b981');
+        setTimeout(() => {
+          setQuesNo(quesNo + 1);
+        }, 3000);
         setCurrentScore(currentScore + 1);
       } else {
-        setQuesNo(quesNo + 1);
+        setColor('#dc2626');
+        setTimeout(() => {
+          setQuesNo(quesNo + 1);
+        }, 3000);
         setCurrentScore(currentScore - 1);
       }
     }
   };
+
   const postResult = async () => {
+    console.log('inside func');
     try {
       const response = await axios.post(
         'https://quizBackend.ankushpndt.repl.co/leaderboard',
@@ -51,110 +64,134 @@ export const Quiz = () => {
           category: category,
         }
       );
-      setLeaderboard(response.data);
+
+      leaderboard.push(response.data.response);
+      setLeaderboard(leaderboard);
     } catch (error) {
       console.log(error);
     }
   };
+  const navigate = useNavigate();
   return (
-    <div className='Quiz' style={{ height: '100vh', color: 'white' }}>
-      {/* <h1>Quiz App</h1> */}
-      <Header username='Ankush' score={currentScore} />
-      {
-        <>
-          <div className='quesNo'>
-            {/* <span className={hide ? 'show' : 'hide'}> */}
-            {quesNo < 5 ? (
-              <span>
-                {quesNo + 1} / {filteredQuestions?.length}
-              </span>
-            ) : (
-              ''
-            )}
+    <>
+      {filteredQuestions?.length > 0 ? (
+        <div className='Quiz' style={{ height: '100%', color: 'white' }}>
+          <Header username={user} score={currentScore} />
+          {
+            <div className='quiz__container'>
+              <div className='ques__no'>
+                {quesNo <= 4 && (
+                  <span>
+                    {quesNo + 1} / {filteredQuestions?.length}
+                  </span>
+                )}
 
-            {/* </span> */}
-            <span>
-              {quesNo < 5 ? (
-                filteredQuestions[quesNo]?.question
-              ) : (
-                <>
-                  {currentScore >= 3
-                    ? 'Congratulations'
-                    : 'Better Luck Next Time'}
-                  {postResult()}
-                </>
-              )}
-            </span>
-          </div>
+                <span>
+                  {quesNo <= 4 ? (
+                    filteredQuestions[quesNo]?.question
+                  ) : (
+                    <p>
+                      {currentScore >= 3
+                        ? 'Congratulations'
+                        : 'Better Luck Next Time'}
+                      <button
+                        className='answer__btn'
+                        onClick={() => {
+                          postResult();
+                          setTimeout(() => {
+                            navigate('/leaderboard');
+                          }, 3000);
+                        }}
+                      >
+                        Show Results
+                      </button>
+                    </p>
+                  )}
+                </span>
+              </div>
 
-          <div className='results'></div>
-          <div className='options'>
-            <ul
-              style={{
-                listStyle: 'none',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                // cursor: 'pointer',
-              }}
-            >
-              {quesNo < 5
-                ? filteredQuestions[quesNo]?.options?.map((item) => (
+              <div className='results'></div>
+              <div className='options'>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                  }}
+                >
+                  {quesNo <= 4
+                    ? filteredQuestions[quesNo]?.options?.map((item) => (
+                        <button
+                          key={v4()}
+                          className='answer__btn'
+                          style={{
+                            backgroundColor: `${
+                              item._id === currentId
+                                ? color
+                                : 'rgba(37, 52, 73, 1)'
+                            }`,
+                          }}
+                          onClick={() => {
+                            answerCheck(item);
+                          }}
+                          value={currentId}
+                        >
+                          {item.option}
+                        </button>
+                      ))
+                    : ''}
+                </ul>
+                {quesNo <= 4 ? (
+                  <>
                     <button
-                      style={{
-                        // backgroundColor: 'transparent',
-                        border: 'none',
-                        color: '#fff',
-
-                        padding: '1rem',
-                        cursor: 'pointer',
-                      }}
-                      key={v4()}
-                      className='answer__btn'
-                      onClick={() => answerCheck(item)}
+                      className='nav__btn'
+                      disabled={quesNo < 1}
+                      onClick={() => setQuesNo(quesNo - 1)}
                     >
-                      {item.option}
+                      <ArrowBackIcon />
                     </button>
-                  ))
-                : ''}
-            </ul>
-            {quesNo < 5 ? (
-              <>
+                    <button
+                      className='nav__btn'
+                      disabled={quesNo > 3}
+                      onClick={() => setQuesNo(quesNo + 1)}
+                    >
+                      <ArrowForwardIcon />
+                    </button>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className='btn__restart'>
                 <button
-                  className='nav__btn'
-                  disabled={quesNo < 1}
-                  onClick={() => setQuesNo(quesNo - 1)}
+                  className='answer__btn'
+                  onClick={() => {
+                    setQuesNo(0);
+                    setCurrentScore(0);
+                  }}
                 >
-                  Previous
+                  Play again
                 </button>
-                <button
-                  className='nav__btn'
-                  disabled={quesNo > 3}
-                  onClick={() => setQuesNo(quesNo + 1)}
+              </div>
+              <div className='home'>
+                <NavLink
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                  }}
+                  to='/home'
                 >
-                  Next
-                </button>
-              </>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className='btn__restart'>
-            <button
-              onClick={() => {
-                setQuesNo(0);
-                setCurrentScore(0);
-              }}
-            >
-              Play again
-            </button>
-          </div>
-          <div className='home'>
-            <NavLink to='/'>Home</NavLink>
-          </div>
-        </>
-      }
-    </div>
+                  <HomeIcon sx={{ width: '2rem', height: '2rem' }} />
+                </NavLink>
+              </div>
+            </div>
+          }
+        </div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
