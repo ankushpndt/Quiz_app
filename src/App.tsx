@@ -7,6 +7,7 @@ import { Login } from './Pages/Login';
 import { Signup } from './Pages/Signup';
 import { useAuth } from './Contexts/AuthContext';
 import { Leaderboard } from './Leaderboard';
+import { ToastContainer } from 'react-toastify';
 export const App = () => {
   const { userLogout, token } = useAuth();
 
@@ -65,6 +66,7 @@ export const App = () => {
           }
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 };

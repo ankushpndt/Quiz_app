@@ -17,3 +17,6 @@
   min-height: 100vh;
   background-color: white;
 }
+.name__error {
+  color: black;
+}

@@ -38,12 +38,16 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
     email,
     password,
   }: SignUpUserDetails) => {
+    console.log({
+      name,
+      email,
+      password,
+    });
     try {
       const response = await axios.post(
         'https://quizBackend.ankushpndt.repl.co/user/signup',
         { name: name, email: email, password: password }
       );
-      // console.log(response);
 
       if (response.data.success === true) {
         const { token, userName } = response?.data;
@@ -56,7 +60,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         );
       } else {
       }
-      response.data.success === true ? navigate('/home') : navigate('/');
+      response.data.success === true && navigate('/home');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<ServerError>;
@@ -65,7 +69,9 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         }
       }
 
-      toast(error.response.data.message);
+      toast(error.response.data.message, {
+        position: 'bottom-center',
+      });
       console.log(error);
     }
   };
@@ -82,7 +88,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
           password: password,
         }
       );
-      console.log(response);
+
       if (response.data.success === true) {
         const { token, userName } = response?.data;
         setToken(token);
@@ -94,7 +100,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
         );
       }
 
-      response.data.success === true ? navigate('/home') : navigate('/');
+      response.data.success === true && navigate('/home');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<ServerError>;
