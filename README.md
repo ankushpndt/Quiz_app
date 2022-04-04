@@ -19,8 +19,8 @@
   1. Review answers and retake Quiz
 6. Personal Scoreboard
   1. The User needs to be logged in to perform this functionality
-  2 .Scoreboard that keeps track of scores obtained while playing different quizzes
-  3 .Retake Quiz
+  2. Scoreboard that keeps track of scores obtained while playing different quizzes
+  3. Retake Quiz
 7. LeaderBoard
   1. Display all scores in the LeaderBoard
 
