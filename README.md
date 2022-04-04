@@ -16,12 +16,12 @@
 3. Take Quiz
 4. Quizzes around different categories
 5. Check Answers
-  -Review answers and retake Quiz
+  - Review answers and retake Quiz
 6. Personal Scoreboard
-  -The User needs to be logged in to perform this functionality
-  -Scoreboard that keeps track of scores obtained while playing different quizzes
-  -Retake Quiz
+  - The User needs to be logged in to perform this functionality
+  - Scoreboard that keeps track of scores obtained while playing different quizzes
+  - Retake Quiz
 7. LeaderBoard
-  -Display all scores in the LeaderBoard
+  - Display all scores in the LeaderBoard
 
 
