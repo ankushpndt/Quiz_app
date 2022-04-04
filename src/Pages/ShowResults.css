@@ -7,6 +7,7 @@
 }
 .results__questions p {
 	padding: 0.5rem;
+	width: 60vw;
 }
 .results__options {
 	padding: 0.5rem;

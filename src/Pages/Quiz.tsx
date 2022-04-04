@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { v4 } from "uuid";
 import { Options } from "../data/Questions.type";
@@ -16,11 +16,7 @@ import { Loader } from "../Components/Loader";
 import { ShowResults } from "./ShowResults";
 
 export type userChoice = {
-	// question: string;
 	userSelected: string;
-	// correct: boolean;
-	// correctAnswer: string | undefined;
-	// category: string | undefined;
 };
 export const Quiz = () => {
 	const {
@@ -45,9 +41,8 @@ export const Quiz = () => {
 	const [color, setColor] = useState("");
 	const [userAnswer, setUserAnswer] = useState<userChoice[]>([]);
 
-	console.log(userAnswer);
 	const answerCheck = (item: Options, quesNo: number) => {
-		if (currentQues >= 0 && currentQues <= 5) {
+		if (currentQues >= 0 && currentQues <= 6) {
 			setCurrentQues(currentQues + 1);
 			setCurrentId(item?._id);
 
@@ -58,20 +53,20 @@ export const Quiz = () => {
 				quesId: filteredQuestions[quesNo]?._id,
 			};
 			setUserAnswer((prev) => [...prev, userChoice]);
-			// setUserAnswer(item?.option);
+
 			if (item.isRight === true) {
 				setColor("#10b981");
 				setTimeout(() => {
 					setQuesNo(quesNo + 1);
 					setColor("");
-				}, 3000);
+				}, 1000);
 				setCurrentScore(currentScore + 1);
 			} else {
 				setColor("#dc2626");
 				setTimeout(() => {
 					setQuesNo(quesNo + 1);
 					setColor("");
-				}, 3000);
+				}, 1000);
 				setCurrentScore(currentScore - 1);
 			}
 		}
@@ -94,7 +89,6 @@ export const Quiz = () => {
 			console.log(error);
 		}
 	};
-	const navigate = useNavigate();
 	const [show, setShow] = useState(false);
 	return (
 		<>
@@ -122,7 +116,6 @@ export const Quiz = () => {
 												className="answer__btn"
 												onClick={() => {
 													postResult();
-													// navigate(`/results/${category}`);
 													setShow(true);
 												}}
 											>
@@ -195,6 +188,7 @@ export const Quiz = () => {
 										setCurrentScore(0);
 										setShow(false);
 										setUserAnswer([]);
+										setCurrentQues(0);
 									}}
 								>
 									Play again
