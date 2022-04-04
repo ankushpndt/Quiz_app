@@ -6,6 +6,7 @@ export type QuizContextType = {
 	setCurrentScore: Function;
 	currentQues: number;
 	setCurrentQues: Function;
+	loader: boolean;
 };
 export type Options = {
 	option: string;

@@ -21,6 +21,7 @@ export type authContext = {
 	error: any;
 	token: string;
 	user: string;
+	loader: boolean;
 };
 
 export type LoginUserDetails = {
@@ -29,10 +30,7 @@ export type LoginUserDetails = {
 };
 
 export type SignUpUserDetails = {
-	// userid: string;
 	name: string;
-	// userName: string;
-	// token: string;
 	email: string;
 	password: string;
 };

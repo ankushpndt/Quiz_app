@@ -10,20 +10,22 @@ export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
 	const [currentQues, setCurrentQues] = useState(1);
 	const [Questions, setQuestions] = useState([]);
 	const { token } = useAuth();
+	const [loader, setLoader] = useState(false);
 	useEffect(() => {
 		token &&
 			(async () => {
 				try {
+					setLoader(true);
 					const response = await axios.get(
 						"https://quizBackend.ankushpndt.repl.co/quiz"
 					);
-
 					setQuestions(response.data.quizData);
+					setLoader(false);
 				} catch (error) {
 					console.log(error);
 				}
 			})();
-	}, [token]);
+	}, [token, setLoader]);
 
 	return (
 		<QuizContext.Provider
@@ -35,6 +37,7 @@ export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
 				setCurrentScore,
 				currentQues,
 				setCurrentQues,
+				loader,
 			}}
 		>
 			{children}

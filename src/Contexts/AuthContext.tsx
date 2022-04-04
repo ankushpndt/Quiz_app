@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 	const [token, setToken] = useState<string>(savedToken);
 	const [error, setError] = useState("");
 	const [user, setUser] = useState<string>(userName);
-
+	const [loader, setLoader] = useState(false);
 	//signup
 
 	const signUpWithCredentials = async ({
@@ -38,12 +38,8 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 		email,
 		password,
 	}: SignUpUserDetails) => {
-		console.log({
-			name,
-			email,
-			password,
-		});
 		try {
+			setLoader(true);
 			const response = await axios.post(
 				"https://quizBackend.ankushpndt.repl.co/user/signup",
 				{ name: name, email: email, password: password }
@@ -58,7 +54,8 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					"login",
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
-			} else {
+				setLoader(false);
+				toast.success(response.data.message);
 			}
 			response.data.success === true ? navigate("/") : navigate("/login");
 		} catch (error) {
@@ -81,6 +78,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 		password,
 	}: LoginUserDetails) => {
 		try {
+			setLoader(true);
 			const response = await axios.post(
 				"https://quizBackend.ankushpndt.repl.co/user/login",
 				{
@@ -98,6 +96,8 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					"login",
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
+				setLoader(false);
+				toast.success(response.data.message);
 			}
 
 			response.data.success === true ? navigate("/") : navigate("/login");
@@ -108,7 +108,6 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					return serverError.response.data;
 				}
 			}
-			// console.log(error.response);
 			toast(error.response.data.message);
 		}
 	};
@@ -131,12 +130,11 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 				userLogout,
 				user,
 				setError,
+				loader,
 			}}
 		>
 			{children}
 		</AuthContext.Provider>
 	);
 };
-export function useAuth() {
-	return useContext(AuthContext);
-}
+export const useAuth = () => useContext(AuthContext);
