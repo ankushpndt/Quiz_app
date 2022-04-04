@@ -4,6 +4,11 @@
 }
 .results__questions {
 	padding: 1rem;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	margin: 2rem 0;
+	background-color: white;
+	color: black;
+	border-radius: 5px;
 }
 .results__questions p {
 	padding: 0.5rem;

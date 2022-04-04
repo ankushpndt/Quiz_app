@@ -6,11 +6,13 @@ export const ShowResults = ({ category, score, userAnswer }: any) => {
 	const { Questions } = useQuiz();
 
 	let newColor: string;
-
+	const filteredQuestions = Questions?.filter(
+		(question) => question?.category?.toLowerCase() === category?.toLowerCase()
+	);
 	return (
 		<div className="results__container">
 			<h3>Your Score: {score}</h3>
-			{Questions?.map((ques) => {
+			{filteredQuestions?.map((ques) => {
 				return (
 					<div className="results__questions" key={v4()}>
 						{ques?.category?.toLowerCase() === category && (
