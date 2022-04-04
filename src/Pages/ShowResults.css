@@ -1,0 +1,21 @@
+.results__container {
+	height: 100%;
+	padding: 5rem 1rem;
+}
+.results__questions {
+	padding: 1rem;
+}
+.results__questions p {
+	padding: 0.5rem;
+}
+.results__options {
+	padding: 0.5rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.results__options p {
+	padding: 0.5rem;
+	border-radius: 5px;
+}
