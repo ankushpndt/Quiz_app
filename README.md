@@ -1,16 +1,16 @@
 # Comic Quiz App
-#Tech Stack
-##Frontend
+# Tech Stack
+## Frontend
 1. React with TypeScript
 2. Style - CSS
 3. Testing Framework - JestJs
 4. Navigation - React Router
-##Backend
+## Backend
 1. Node
 2. Express
 3. MongoDB
 4. JWT authentication
-##Functionalities implemented
+## Functionalities implemented
 1.Login with jwt authentication
 2. Login to track personal score and be part of leaderboard
 3. Take Quiz
