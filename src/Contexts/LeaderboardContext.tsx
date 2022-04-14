@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { LeaderboardContextType } from "../types/LeaderboardContext.type";
 import { useAuth } from "./AuthContext";
+import { toast } from "react-toastify";
 const LeaderboardContext = createContext({} as LeaderboardContextType);
 
 export const LeaderboardProvider = ({
@@ -20,7 +21,9 @@ export const LeaderboardProvider = ({
 					);
 					setLeaderboard(response.data.leaderboardData);
 				} catch (error) {
-					console.log(error);
+					toast(error.response.data.message, {
+						position: "bottom-center",
+					});
 				}
 			})();
 	}, [token]);

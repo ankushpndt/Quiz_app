@@ -53,7 +53,7 @@ export const App = () => {
 							return { fontWeight: isActive ? "bold" : "normal" };
 						}}
 					>
-						SignUp
+						Sign Up
 					</NavLink>
 				)}
 				{token && (

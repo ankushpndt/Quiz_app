@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { QuizContextType } from "../types/QuizContext.type";
 import { useAuth } from "./AuthContext";
+import { toast } from "react-toastify";
 const QuizContext = createContext({} as QuizContextType);
 
 export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
@@ -22,7 +23,9 @@ export const QuizProvider = ({ children }: { children?: React.ReactNode }) => {
 					setQuestions(response.data.quizData);
 					setLoader(false);
 				} catch (error) {
-					console.log(error);
+					toast(error.response.data.message, {
+						position: "bottom-center",
+					});
 				}
 			})();
 	}, [token, setLoader]);
