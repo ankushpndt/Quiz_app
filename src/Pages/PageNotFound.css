@@ -20,7 +20,10 @@
 	justify-content: center;
 	text-align: center;
 }
-
+.ghost__image {
+	width: 100%;
+	max-width: 120px;
+}
 .page__not__found__heading {
 	color: var(--heading);
 	font-size: 12.5rem;
@@ -30,6 +33,9 @@
 	white-space: nowrap;
 }
 @media (max-width: 30rem) {
+	.ghost__image {
+		max-width: 90px;
+	}
 	.page__not__found__heading {
 		font-size: 8.5rem;
 	}
@@ -47,4 +53,12 @@
 .page__not__found__content {
 	color: #ccc;
 	margin-top: 0;
+}
+@keyframes spooky {
+	from {
+		transform: translatey(0.15em) scaley(0.95);
+	}
+	to {
+		transform: translatey(-0.15em);
+	}
 }
