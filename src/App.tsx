@@ -10,14 +10,17 @@ import { Leaderboard } from "./Pages/Leaderboard";
 import { ToastContainer } from "react-toastify";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { ShowResults } from "./Pages/ShowResults";
+import { useTheme } from "./Contexts/ThemeContext";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 export const App = () => {
 	const { userLogout, token } = useAuth();
-
+	const { theme, changeTheme } = useTheme();
 	return (
-		<div className="App">
-			<div className="routes">
+		<div className={`${theme === "dark" ? "dark__theme" : "light__theme"}`}>
+			<div className={`${theme === "dark" ? "routes" : "routes__light"}`}>
 				<NavLink
-					className="route"
+					className={`${theme === "dark" ? "route" : "route__light"}`}
 					to="/"
 					style={({ isActive }) => {
 						return { fontWeight: isActive ? "bold" : "normal" };
@@ -26,7 +29,7 @@ export const App = () => {
 					Home
 				</NavLink>
 				<NavLink
-					className="route"
+					className={`${theme === "dark" ? "route" : "route__light"}`}
 					to="/leaderboard"
 					style={({ isActive }) => {
 						return { fontWeight: isActive ? "bold" : "normal" };
@@ -34,9 +37,23 @@ export const App = () => {
 				>
 					Leaderboards
 				</NavLink>
+				<button
+					onClick={() => changeTheme()}
+					style={{
+						backgroundColor: "transparent",
+						border: "none",
+						cursor: "pointer",
+					}}
+				>
+					{theme === "dark" ? (
+						<WbSunnyIcon sx={{ color: "white" }} />
+					) : (
+						<DarkModeIcon />
+					)}
+				</button>
 				{!token && (
 					<NavLink
-						className="route"
+						className={`${theme === "dark" ? "route" : "route__light"}`}
 						to="/login"
 						style={({ isActive }) => {
 							return { fontWeight: isActive ? "bold" : "normal" };
@@ -47,7 +64,7 @@ export const App = () => {
 				)}
 				{!token && (
 					<NavLink
-						className="route"
+						className={`${theme === "dark" ? "route" : "route__light"}`}
 						to="/signup"
 						style={({ isActive }) => {
 							return { fontWeight: isActive ? "bold" : "normal" };
@@ -61,7 +78,7 @@ export const App = () => {
 						style={{
 							backgroundColor: "transparent",
 							border: "none",
-							color: "white",
+							color: `${theme === "dark" ? "white" : "black"}`,
 							cursor: "pointer",
 							fontSize: "1rem",
 						}}

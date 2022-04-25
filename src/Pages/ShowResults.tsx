@@ -1,6 +1,7 @@
 import { useQuiz } from "../Contexts/QuizContext";
 import { v4 } from "uuid";
 import "./ShowResults.css";
+import { useTheme } from "../Contexts/ThemeContext";
 
 export const ShowResults = ({ category, score, userAnswer }: any) => {
 	const { Questions } = useQuiz();
@@ -9,12 +10,20 @@ export const ShowResults = ({ category, score, userAnswer }: any) => {
 	const filteredQuestions = Questions?.filter(
 		(question) => question?.category?.toLowerCase() === category?.toLowerCase()
 	);
+	const { theme } = useTheme();
 	return (
 		<div className="results__container">
 			<h3>Your Score: {score}</h3>
 			{filteredQuestions?.map((ques) => {
 				return (
-					<div className="results__questions" key={v4()}>
+					<div
+						className={`${
+							theme === "dark"
+								? "results__questions"
+								: "results__questions__light"
+						}`}
+						key={v4()}
+					>
 						{ques?.category?.toLowerCase() === category && (
 							<p>{ques?.question}</p>
 						)}

@@ -14,6 +14,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import { Loader } from "../Components/Loader";
 import { ShowResults } from "./ShowResults";
+import { useTheme } from "../Contexts/ThemeContext";
 
 export type userChoice = {
 	userSelected: string;
@@ -90,13 +91,18 @@ export const Quiz = () => {
 		}
 	};
 	const [show, setShow] = useState(false);
+	const { theme } = useTheme();
 	return (
 		<>
 			{filteredQuestions?.length > 0 ? (
-				<div className="Quiz" style={{ height: "100%", color: "white" }}>
+				<div className="Quiz">
 					<Header username={user} score={currentScore} />
 					{
-						<div className="quiz__container">
+						<div
+							className={`${
+								theme === "dark" ? "quiz__container" : "quiz__container__dark"
+							}`}
+						>
 							<div className="ques__no">
 								{quesNo <= 4 && (
 									<span>
@@ -113,7 +119,11 @@ export const Quiz = () => {
 												? "Congratulations"
 												: "Better Luck Next Time"}
 											<button
-												className="answer__btn"
+												className={`${
+													theme === "dark"
+														? "answer__btn"
+														: "answer__btn__light"
+												}`}
 												onClick={() => {
 													postResult();
 													setShow(true);
@@ -141,12 +151,18 @@ export const Quiz = () => {
 										? filteredQuestions[quesNo]?.options?.map((item) => (
 												<button
 													key={v4()}
-													className="answer__btn"
+													className={`${
+														theme === "dark"
+															? "answer__btn"
+															: "answer__btn__light"
+													}`}
 													style={{
 														backgroundColor: `${
 															item._id === currentId
 																? color
-																: "rgba(37, 52, 73, 1)"
+																: theme === "dark"
+																? "rgba(37, 52, 73, 1)"
+																: "white"
 														}`,
 													}}
 													onClick={() => {
@@ -162,14 +178,18 @@ export const Quiz = () => {
 								{quesNo <= 4 ? (
 									<>
 										<button
-											className="nav__btn"
+											className={`${
+												theme === "dark" ? "nav__btn" : "nav__btn__light"
+											}`}
 											disabled={quesNo < 1}
 											onClick={() => setQuesNo(quesNo - 1)}
 										>
 											<ArrowBackIcon />
 										</button>
 										<button
-											className="nav__btn"
+											className={`${
+												theme === "dark" ? "nav__btn" : "nav__btn__light"
+											}`}
 											disabled={quesNo > 3}
 											onClick={() => setQuesNo(quesNo + 1)}
 										>
@@ -182,7 +202,9 @@ export const Quiz = () => {
 							</div>
 							<div className="btn__restart">
 								<button
-									className="answer__btn"
+									className={`${
+										theme === "dark" ? "answer__btn" : "answer__btn__light"
+									}`}
 									onClick={() => {
 										setQuesNo(0);
 										setCurrentScore(0);
@@ -198,11 +220,16 @@ export const Quiz = () => {
 								<NavLink
 									style={{
 										textDecoration: "none",
-										color: "black",
 									}}
-									to="/home"
+									to="/"
 								>
-									<HomeIcon sx={{ width: "2rem", height: "2rem" }} />
+									<HomeIcon
+										sx={{
+											width: "2rem",
+											height: "2rem",
+											color: `${theme === "dark" ? "black" : "white"}`,
+										}}
+									/>
 								</NavLink>
 							</div>
 						</div>
