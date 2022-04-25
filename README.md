@@ -3,8 +3,7 @@
 ## Frontend
 1. React with TypeScript
 2. Style - CSS
-3. Testing Framework - JestJs
-4. Navigation - React Router
+3. Navigation - React Router
 ## Backend
 1. Node
 2. Express
