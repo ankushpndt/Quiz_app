@@ -53,6 +53,19 @@ export const Signup = () => {
 						required
 						value={name}
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
+						InputProps={{
+							style: {
+								outline: `${
+									theme === "dark" ? "1px solid white" : "1px solid gray"
+								}`,
+							},
+						}}
+						InputLabelProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						FormHelperTextProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
 					/>
 
 					<br />
@@ -65,6 +78,19 @@ export const Signup = () => {
 						required
 						value={email}
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
+						InputProps={{
+							style: {
+								outline: `${
+									theme === "dark" ? "1px solid white" : "1px solid gray"
+								}`,
+							},
+						}}
+						InputLabelProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						FormHelperTextProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
 					/>
 					<br />
 					<TextField
@@ -76,6 +102,19 @@ export const Signup = () => {
 						required
 						value={password}
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
+						InputProps={{
+							style: {
+								outline: `${
+									theme === "dark" ? "1px solid white" : "1px solid gray"
+								}`,
+							},
+						}}
+						InputLabelProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						FormHelperTextProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
 					/>
 					<br />
 					<div

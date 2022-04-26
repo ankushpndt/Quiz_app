@@ -54,7 +54,24 @@ export const Login = () => {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						value={email}
-						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
+						sx={{
+							input: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						InputProps={{
+							style: {
+								outline: `${
+									theme === "dark" ? "1px solid white" : "1px solid gray"
+								}`,
+							},
+						}}
+						InputLabelProps={{
+							style: {
+								color: `${theme === "dark" ? "white" : "black"}`,
+							},
+						}}
+						FormHelperTextProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
 					/>
 
 					<br />
@@ -69,7 +86,22 @@ export const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						value={password}
-						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
+						sx={{
+							input: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						InputProps={{
+							style: {
+								border: `${
+									theme === "dark" ? "1px solid white" : "1px solid gray"
+								}`,
+							},
+						}}
+						InputLabelProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
+						FormHelperTextProps={{
+							style: { color: `${theme === "dark" ? "white" : "black"}` },
+						}}
 					/>
 					<br />
 					<div
