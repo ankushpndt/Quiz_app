@@ -7,6 +7,7 @@ import { validateForm } from "../Components/ValidateForm";
 import { validate } from "../types/ValidateForm.type";
 import { LoginUserDetails } from "../Contexts/AuthContext.type";
 import { Loader } from "../Components/Loader";
+import { useTheme } from "../Contexts/ThemeContext";
 export const Login = () => {
 	const { loginWithCredentials, error, setError, loader } = useAuth();
 	const [email, setEmail] = useState("");
@@ -20,9 +21,9 @@ export const Login = () => {
 			loginWithCredentials({ email, password });
 		setError("");
 	};
-
+	const { theme } = useTheme();
 	return (
-		<div className="login">
+		<div className={`${theme === "dark" ? "login" : "login__light"}`}>
 			{!loader ? (
 				<form
 					onSubmit={submitHandler}
@@ -36,8 +37,13 @@ export const Login = () => {
 						border: "2px solid #f0f0f0",
 						width: "20rem",
 					}}
+					className={`${
+						theme === "dark" ? "login__form" : "login__form__light"
+					}`}
 				>
-					<h2>Login</h2>
+					<h2 style={{ color: `${theme === "dark" ? "white" : "black"}` }}>
+						Login
+					</h2>
 					<br />
 					<TextField
 						id="standard__basic"
@@ -48,6 +54,7 @@ export const Login = () => {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						value={email}
+						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 					/>
 
 					<br />
@@ -62,9 +69,14 @@ export const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						value={password}
+						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 					/>
 					<br />
-					<div className="name__error">
+					<div
+						className={`${
+							theme === "dark" ? "name__error" : "name__error__light"
+						}`}
+					>
 						{errorMessage !== "" && errorMessage}
 					</div>
 					<div>{error?.message}</div>
@@ -88,7 +100,7 @@ export const Login = () => {
 						<NavLink
 							style={{
 								textDecoration: "none",
-								color: "black",
+								color: `${theme === "dark" ? "white" : "black"}`,
 							}}
 							to="/signup"
 						>

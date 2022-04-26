@@ -1,22 +1,39 @@
 #login__btn__outlined {
-  border-color: black;
-  color: black;
-  cursor: pointer;
-  background-color: white;
-  padding: 0.5rem;
+	border-color: black;
+	color: black;
+	cursor: pointer;
+	background-color: white;
+	padding: 0.5rem;
 }
 #login__btn__outlined:hover {
-  color: white;
-  background-color: black;
+	color: white;
+	background-color: black;
 }
 .login,
 .signup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: rgba(37, 52, 73, 1);
+}
+.login__light,
+.signup__light {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: white;
 }
 .name__error {
-  color: black;
+	color: white;
+}
+.name__error__light {
+	color: black;
+}
+.login__form {
+	background-color: rgba(37, 52, 73, 1);
+}
+.login__form__light {
+	background-color: white;
 }

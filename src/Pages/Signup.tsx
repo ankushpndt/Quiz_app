@@ -5,6 +5,7 @@ import { TextField } from "@mui/material";
 import { validateForm } from "../Components/ValidateForm";
 import "./Account.css";
 import { Loader } from "../Components/Loader";
+import { useTheme } from "../Contexts/ThemeContext";
 export const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -19,9 +20,9 @@ export const Signup = () => {
 			signUpWithCredentials({ name, email, password });
 		setError("");
 	};
-
+	const { theme } = useTheme();
 	return (
-		<div className="signup">
+		<div className={`${theme === "dark" ? "login" : "login__light"}`}>
 			{!loader ? (
 				<form
 					style={{
@@ -34,9 +35,14 @@ export const Signup = () => {
 						border: "2px solid #f0f0f0",
 						width: "20rem",
 					}}
+					className={`${
+						theme === "dark" ? "login__form" : "login__form__light"
+					}`}
 					onSubmit={submitHandler}
 				>
-					<h2>Sign Up</h2>
+					<h2 style={{ color: `${theme === "dark" ? "white" : "black"}` }}>
+						Sign Up
+					</h2>
 					<br />
 					<TextField
 						type="text"
@@ -46,6 +52,7 @@ export const Signup = () => {
 						onChange={(e) => setName(e.target.value)}
 						required
 						value={name}
+						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 					/>
 
 					<br />
@@ -57,6 +64,7 @@ export const Signup = () => {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						value={email}
+						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 					/>
 					<br />
 					<TextField
@@ -67,9 +75,14 @@ export const Signup = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						value={password}
+						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 					/>
 					<br />
-					<div className="name__error">
+					<div
+						className={`${
+							theme === "dark" ? "name__error" : "name__error__light"
+						}`}
+					>
 						{errorMessage !== "" && errorMessage}
 					</div>
 					<div>{error?.message}</div>
@@ -80,7 +93,7 @@ export const Signup = () => {
 						<NavLink
 							style={{
 								textDecoration: "none",
-								color: "black",
+								color: `${theme === "dark" ? "white" : "black"}`,
 							}}
 							to="/login"
 						>
