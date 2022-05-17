@@ -8,6 +8,7 @@ import {
 	SignUpUserDetails,
 } from "./AuthContext.type";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const AuthContext = createContext<authContext>({} as authContext);
 
 export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
@@ -55,21 +56,22 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success(response.data.message);
+				toast.success(response.data.message, {
+					position: "bottom-center",
+				});
 			}
 			response.data.success === true ? navigate("/") : navigate("/login");
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
 				const serverError = error as AxiosError<ServerError>;
 				if (serverError && serverError.response) {
+					toast.dark(serverError.response.data.message, {
+						position: "bottom-center",
+					});
+					setLoader(false);
 					return serverError.response.data;
 				}
 			}
-
-			toast(error.response.data.message, {
-				position: "bottom-center",
-			});
-			setLoader(false);
 		}
 	};
 
@@ -86,7 +88,6 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					password: password,
 				}
 			);
-
 			if (response.data.success === true) {
 				const { token, userName } = response?.data;
 				setToken(token);
@@ -97,7 +98,9 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success(response.data.message);
+				toast.success(response.data.message, {
+					position: "bottom-center",
+				});
 			}
 
 			response.data.success === true ? navigate("/") : navigate("/login");
@@ -105,12 +108,13 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 			if (axios.isAxiosError(error)) {
 				const serverError = error as AxiosError<ServerError>;
 				if (serverError && serverError.response) {
+					toast.dark(serverError.response.data.message, {
+						position: "bottom-center",
+					});
+					setLoader(false);
 					return serverError.response.data;
 				}
 			}
-			toast(error.response.data.message);
-
-			setLoader(false);
 		}
 	};
 	const userLogout = async () => {
