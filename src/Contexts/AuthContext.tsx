@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 			toast(error.response.data.message, {
 				position: "bottom-center",
 			});
-			console.log(error);
+			setLoader(false);
 		}
 	};
 
@@ -109,6 +109,8 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 				}
 			}
 			toast(error.response.data.message);
+
+			setLoader(false);
 		}
 	};
 	const userLogout = async () => {

@@ -55,7 +55,7 @@ export const Signup = () => {
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 						InputProps={{
 							style: {
-								outline: `${
+								border: `${
 									theme === "dark" ? "1px solid white" : "1px solid gray"
 								}`,
 							},
@@ -80,7 +80,7 @@ export const Signup = () => {
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 						InputProps={{
 							style: {
-								outline: `${
+								border: `${
 									theme === "dark" ? "1px solid white" : "1px solid gray"
 								}`,
 							},
@@ -104,7 +104,7 @@ export const Signup = () => {
 						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
 						InputProps={{
 							style: {
-								outline: `${
+								border: `${
 									theme === "dark" ? "1px solid white" : "1px solid gray"
 								}`,
 							},
