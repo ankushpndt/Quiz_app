@@ -28,29 +28,18 @@ export const App = () => {
 				>
 					Home
 				</NavLink>
-				<NavLink
-					className={`${theme === "dark" ? "route" : "route__light"}`}
-					to="/leaderboard"
-					style={({ isActive }) => {
-						return { fontWeight: isActive ? "bold" : "normal" };
-					}}
-				>
-					Leaderboards
-				</NavLink>
-				<button
-					onClick={() => changeTheme()}
-					style={{
-						backgroundColor: "transparent",
-						border: "none",
-						cursor: "pointer",
-					}}
-				>
-					{theme === "dark" ? (
-						<WbSunnyIcon sx={{ color: "white" }} />
-					) : (
-						<DarkModeIcon />
-					)}
-				</button>
+				{token && (
+					<NavLink
+						className={`${theme === "dark" ? "route" : "route__light"}`}
+						to="/leaderboard"
+						style={({ isActive }) => {
+							return { fontWeight: isActive ? "bold" : "normal" };
+						}}
+					>
+						Leaderboards
+					</NavLink>
+				)}
+
 				{!token && (
 					<NavLink
 						className={`${theme === "dark" ? "route" : "route__light"}`}
@@ -87,6 +76,20 @@ export const App = () => {
 						Logout
 					</button>
 				)}
+				<button
+					onClick={() => changeTheme()}
+					style={{
+						backgroundColor: "transparent",
+						border: "none",
+						cursor: "pointer",
+					}}
+				>
+					{theme === "dark" ? (
+						<WbSunnyIcon sx={{ color: "white" }} />
+					) : (
+						<DarkModeIcon />
+					)}
+				</button>
 			</div>
 			<Routes>
 				<Route
@@ -111,7 +114,7 @@ export const App = () => {
 				<Route path="/results/:category" element={<ShowResults />} />
 				<Route path="/*" element={<PageNotFound />} />
 			</Routes>
-			<ToastContainer />
+			<ToastContainer autoClose={2000} theme="dark" />
 		</div>
 	);
 };

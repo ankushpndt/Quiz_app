@@ -6,7 +6,6 @@ import { validateForm } from "../Components/ValidateForm";
 import "./Account.css";
 import { Loader } from "../Components/Loader";
 import { useTheme } from "../Contexts/ThemeContext";
-import { ToastContainer } from "react-toastify";
 export const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -144,7 +143,6 @@ export const Signup = () => {
 			) : (
 				<Loader />
 			)}
-			<ToastContainer />
 		</div>
 	);
 };

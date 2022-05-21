@@ -8,7 +8,6 @@ import { validate } from "../types/ValidateForm.type";
 import { LoginUserDetails } from "../Contexts/AuthContext.type";
 import { Loader } from "../Components/Loader";
 import { useTheme } from "../Contexts/ThemeContext";
-import { ToastContainer } from "react-toastify";
 export const Login = () => {
 	const { loginWithCredentials, error, setError, loader } = useAuth();
 	const [email, setEmail] = useState("");
@@ -23,7 +22,6 @@ export const Login = () => {
 		setError("");
 	};
 	const { theme } = useTheme();
-	console.log(loader);
 	return (
 		<div className={`${theme === "dark" ? "login" : "login__light"}`}>
 			{!loader ? (
@@ -145,7 +143,6 @@ export const Login = () => {
 			) : (
 				<Loader />
 			)}
-			<ToastContainer />
 		</div>
 	);
 };

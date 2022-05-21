@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success(response.data.message, {
+				toast.success("Signing you up", {
 					position: "bottom-center",
 				});
 			}
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 			if (axios.isAxiosError(error)) {
 				const serverError = error as AxiosError<ServerError>;
 				if (serverError && serverError.response) {
-					toast.dark(serverError.response.data.message, {
+					toast.error(serverError.response.data.message, {
 						position: "bottom-center",
 					});
 					setLoader(false);
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success(response.data.message, {
+				toast.success("Logging you in", {
 					position: "bottom-center",
 				});
 			}
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 			if (axios.isAxiosError(error)) {
 				const serverError = error as AxiosError<ServerError>;
 				if (serverError && serverError.response) {
-					toast.dark(serverError.response.data.message, {
+					toast.error(serverError.response.data.message, {
 						position: "bottom-center",
 					});
 					setLoader(false);
