@@ -41,7 +41,8 @@ export const Quiz = () => {
 
 	const [color, setColor] = useState("");
 	const [userAnswer, setUserAnswer] = useState<userChoice[]>([]);
-
+	const [show, setShow] = useState(false);
+	const { theme } = useTheme();
 	const answerCheck = (item: Options, quesNo: number) => {
 		if (currentQues >= 0 && currentQues <= 6) {
 			setCurrentQues(currentQues + 1);
@@ -90,8 +91,7 @@ export const Quiz = () => {
 			console.log(error);
 		}
 	};
-	const [show, setShow] = useState(false);
-	const { theme } = useTheme();
+
 	return (
 		<>
 			{filteredQuestions?.length > 0 ? (
@@ -182,7 +182,9 @@ export const Quiz = () => {
 												theme === "dark" ? "nav__btn" : "nav__btn__light"
 											}`}
 											disabled={quesNo < 1}
-											onClick={() => setQuesNo(quesNo - 1)}
+											onClick={() => {
+												setQuesNo(quesNo - 1);
+											}}
 										>
 											<ArrowBackIcon />
 										</button>
@@ -191,7 +193,9 @@ export const Quiz = () => {
 												theme === "dark" ? "nav__btn" : "nav__btn__light"
 											}`}
 											disabled={quesNo > 3}
-											onClick={() => setQuesNo(quesNo + 1)}
+											onClick={() => {
+												setQuesNo(quesNo + 1);
+											}}
 										>
 											<ArrowForwardIcon />
 										</button>

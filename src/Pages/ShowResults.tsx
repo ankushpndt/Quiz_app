@@ -5,12 +5,11 @@ import { useTheme } from "../Contexts/ThemeContext";
 
 export const ShowResults = ({ category, score, userAnswer }: any) => {
 	const { Questions } = useQuiz();
-
-	let newColor: string;
+	const { theme } = useTheme();
 	const filteredQuestions = Questions?.filter(
 		(question) => question?.category?.toLowerCase() === category?.toLowerCase()
 	);
-	const { theme } = useTheme();
+
 	return (
 		<div className="results__container">
 			<h3>Your Score: {score}</h3>
@@ -30,14 +29,16 @@ export const ShowResults = ({ category, score, userAnswer }: any) => {
 
 						{ques.category?.toLowerCase() === category &&
 							ques?.options?.map((option) => {
+								let newColor = "";
 								for (let i of userAnswer) {
 									if (i.quesId === ques._id) {
-										newColor =
-											i._id === option._id && option.isRight
+										if (i._id === option._id) {
+											newColor = option.isRight
 												? "#10b981"
-												: i._id === option._id && !option.isRight
+												: !option.isRight
 												? "#dc2626"
 												: "";
+										}
 									}
 								}
 								return (
@@ -45,7 +46,9 @@ export const ShowResults = ({ category, score, userAnswer }: any) => {
 										<p
 											style={{
 												backgroundColor: `${
-													option.isRight ? "#10b981" : newColor
+													newColor === "" && option.isRight
+														? "#10b981"
+														: newColor
 												}`,
 											}}
 										>
