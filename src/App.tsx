@@ -7,12 +7,13 @@ import { Login } from "./Pages/Login";
 import { Signup } from "./Pages/Signup";
 import { useAuth } from "./Contexts/AuthContext";
 import { Leaderboard } from "./Pages/Leaderboard";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { ShowResults } from "./Pages/ShowResults";
 import { useTheme } from "./Contexts/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import "react-toastify/dist/ReactToastify.css";
 export const App = () => {
 	const { userLogout, token } = useAuth();
 	const { theme, changeTheme } = useTheme();
@@ -114,7 +115,13 @@ export const App = () => {
 				<Route path="/results/:category" element={<ShowResults />} />
 				<Route path="/*" element={<PageNotFound />} />
 			</Routes>
-			<ToastContainer autoClose={2000} theme="dark" />
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={true}
+				transition={Slide}
+				theme="dark"
+			/>
 		</div>
 	);
 };

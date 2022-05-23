@@ -56,10 +56,10 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success("Signing you up", {
-					position: "bottom-center",
-				});
 			}
+			toast.success("Signed Up successfully!", {
+				position: "bottom-center",
+			});
 			response.data.success === true ? navigate("/") : navigate("/login");
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
@@ -98,10 +98,10 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 					JSON.stringify({ isUserLoggedIn: true, token, user: userName })
 				);
 				setLoader(false);
-				toast.success("Logging you in", {
-					position: "bottom-center",
-				});
 			}
+			toast.success("Signed in successfully!", {
+				position: "bottom-center",
+			});
 
 			response.data.success === true ? navigate("/") : navigate("/login");
 		} catch (error) {
@@ -123,6 +123,7 @@ export const AuthProvider = ({ children }: { children?: React.ReactNode }) => {
 		setToken("");
 		setUser("");
 		navigate("/login");
+		toast.success("Logged out successfully");
 	};
 
 	return (

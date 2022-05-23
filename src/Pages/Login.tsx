@@ -3,23 +3,18 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Account.css";
 import { TextField } from "@mui/material";
-import { validateForm } from "../Components/ValidateForm";
-import { validate } from "../types/ValidateForm.type";
 import { LoginUserDetails } from "../Contexts/AuthContext.type";
 import { Loader } from "../Components/Loader";
 import { useTheme } from "../Contexts/ThemeContext";
 export const Login = () => {
-	const { loginWithCredentials, error, setError, loader } = useAuth();
+	const { loginWithCredentials, loader } = useAuth();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errorMessage, setErrorMessage] = useState<string>("");
 
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		validateForm({ email, password, setErrorMessage } as validate) &&
-			loginWithCredentials({ email, password });
-		setError("");
+		loginWithCredentials({ email, password });
 	};
 	const { theme } = useTheme();
 	return (
@@ -103,15 +98,6 @@ export const Login = () => {
 							style: { color: `${theme === "dark" ? "white" : "black"}` },
 						}}
 					/>
-					<br />
-					<div
-						className={`${
-							theme === "dark" ? "name__error" : "name__error__light"
-						}`}
-					>
-						{errorMessage !== "" && errorMessage}
-					</div>
-					<div>{error?.message}</div>
 					<br />
 					{/*Login button*/}
 					<input type="submit" value="LOGIN" id="login__btn__outlined" />
