@@ -1,13 +1,26 @@
 #login__btn__outlined {
-	border-color: black;
-	color: black;
+	color: white;
+	cursor: pointer;
+	background-color: rgba(37, 52, 73, 1);
+	padding: 0.5rem;
+	border: 1px solid white;
+}
+#login__btn__outlined:hover {
+	color: rgba(37, 52, 73, 1);
+	background-color: white;
+	border: 1px solid rgba(37, 52, 73, 1);
+}
+#login__btn__outlined__light {
+	color: rgba(37, 52, 73, 1);
 	cursor: pointer;
 	background-color: white;
 	padding: 0.5rem;
+	border: 1px solid rgba(37, 52, 73, 1);
 }
-#login__btn__outlined:hover {
+#login__btn__outlined__light:hover {
 	color: white;
-	background-color: black;
+	background-color: rgba(37, 52, 73, 1);
+	border: 1px solid white;
 }
 .login,
 .signup {

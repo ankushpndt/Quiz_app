@@ -6,11 +6,16 @@ import { validateForm } from "../Components/ValidateForm";
 import "./Account.css";
 import { Loader } from "../Components/Loader";
 import { useTheme } from "../Contexts/ThemeContext";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export const Signup = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
 	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [showPass, setShowPass] = useState(false);
 	const { signUpWithCredentials, error, setError, loader } = useAuth();
 
 	const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,7 +45,11 @@ export const Signup = () => {
 					}`}
 					onSubmit={submitHandler}
 				>
-					<h2 style={{ color: `${theme === "dark" ? "white" : "black"}` }}>
+					<h2
+						style={{
+							color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+						}}
+					>
 						Sign Up
 					</h2>
 					<br />
@@ -52,19 +61,20 @@ export const Signup = () => {
 						onChange={(e) => setName(e.target.value)}
 						required
 						value={name}
-						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
-						InputProps={{
-							style: {
-								border: `${
-									theme === "dark" ? "1px solid white" : "1px solid gray"
-								}`,
+						sx={{
+							input: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
 							},
 						}}
 						InputLabelProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 						FormHelperTextProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 					/>
 
@@ -77,43 +87,75 @@ export const Signup = () => {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						value={email}
-						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
-						InputProps={{
-							style: {
-								border: `${
-									theme === "dark" ? "1px solid white" : "1px solid gray"
-								}`,
+						sx={{
+							input: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
 							},
 						}}
 						InputLabelProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 						FormHelperTextProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 					/>
 					<br />
 					<TextField
-						type="password"
+						type={showPass ? "text" : "password"}
 						label="Password"
 						name="password"
 						helperText="Enter your password here"
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						value={password}
-						sx={{ input: { color: `${theme === "dark" ? "white" : "black"}` } }}
-						InputProps={{
-							style: {
-								border: `${
-									theme === "dark" ? "1px solid white" : "1px solid gray"
-								}`,
+						sx={{
+							input: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
 							},
 						}}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										aria-label="toggle password visibility"
+										onClick={() => setShowPass(!showPass)}
+										onMouseDown={(e) => e.preventDefault()}
+										edge="end"
+									>
+										{showPass ? (
+											<VisibilityOff
+												sx={{
+													color: `${
+														theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"
+													}`,
+												}}
+											/>
+										) : (
+											<Visibility
+												sx={{
+													color: `${
+														theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"
+													}`,
+												}}
+											/>
+										)}
+									</IconButton>
+								</InputAdornment>
+							),
+						}}
 						InputLabelProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 						FormHelperTextProps={{
-							style: { color: `${theme === "dark" ? "white" : "black"}` },
+							style: {
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
+							},
 						}}
 					/>
 					<br />
@@ -126,13 +168,21 @@ export const Signup = () => {
 					</div>
 					<div>{error?.message}</div>
 					<br />
-					<input type="submit" value="SIGN UP" id="login__btn__outlined" />
+					<input
+						type="submit"
+						value="Sign up"
+						id={
+							theme === "dark"
+								? "login__btn__outlined"
+								: "login__btn__outlined__light"
+						}
+					/>
 					<br />
 					<p>
 						<NavLink
 							style={{
 								textDecoration: "none",
-								color: `${theme === "dark" ? "white" : "black"}`,
+								color: `${theme === "dark" ? "white" : "rgba(37, 52, 73, 1)"}`,
 							}}
 							to="/login"
 						>
