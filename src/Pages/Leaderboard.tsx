@@ -29,17 +29,20 @@ export const Leaderboard = () => {
 						</tbody>
 
 						{leaderboard?.length > 0 ? (
-							leaderboard?.map((item) => (
-								<tbody key={v4()}>
-									<tr>
-										<td style={{ padding: "0.4rem 0" }} key={v4()}>
-											{item?.category}
-										</td>
-										<td>{item?.name}</td>
-										<td>{item?.score}</td>
-									</tr>
-								</tbody>
-							))
+							leaderboard
+								?.slice(0)
+								.reverse()
+								.map((item) => (
+									<tbody key={v4()}>
+										<tr>
+											<td style={{ padding: "0.4rem 0" }} key={v4()}>
+												{item?.category}
+											</td>
+											<td>{item?.name}</td>
+											<td>{item?.score}</td>
+										</tr>
+									</tbody>
+								))
 						) : (
 							<div
 								style={{
